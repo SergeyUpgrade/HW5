@@ -72,3 +72,20 @@ def create_database(database_name: str, params: dict) -> None:
     conn.commit()
     conn.close()
 
+
+def save_data_to_database_emp(data_emp: list[dict[str, Any]], database_name: str, params: dict) -> None:
+    """
+    Функция для заполнения таблицы компаний в БД
+    """
+    conn = psycopg2.connect(dbname=database_name, **params)
+
+    with conn.cursor() as cur:
+        for emp in data_emp:
+            cur.execute("""
+                INSERT INTO employers (employer_id, employer_name, employer_area, url, open_vacancies)
+                VALUES (%s, %s, %s, %s, %s)
+                """,
+                        (emp['id'], emp['name'], emp['area']['name'], emp['alternate_url'], emp['open_vacancies']))
+
+    conn.commit()
+    conn.close()
