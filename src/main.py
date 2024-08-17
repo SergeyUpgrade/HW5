@@ -32,4 +32,11 @@ def main():
                 info_in_table.add_row([i[0], i[1]])
             print(info_in_table)
 
+        elif user_input == "2":
+            all_vacancies = db_manager.get_all_vacancies()
+            info_in_table = PrettyTable(['Название компании', 'Название вакансий', 'Зарплата', 'Ссылка на вакансию'])
+            for i in all_vacancies:
+                info_in_table.add_row([i[0], i[1], i[2], i[3]])
+            print(info_in_table)
+
 
