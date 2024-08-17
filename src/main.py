@@ -46,5 +46,12 @@ def main():
                 info_in_table.add_row([i[0]])
             print(info_in_table)
 
+        elif user_input == "4":
+            vacancies_with_higher_salary = db_manager.get_vacancies_with_higher_salary()
+            info_in_table = PrettyTable(['Список всех вакансий, у которых зарплата выше средней по всем вакансиям'])
+            for i in vacancies_with_higher_salary:
+                info_in_table.add_row([i[0]])
+            print(info_in_table)
+
 
 
