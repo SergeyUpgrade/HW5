@@ -1,3 +1,5 @@
+import PrettyTable
+
 from config import config
 from src.DBManager import DBManager
 from src.utils import get_employee_data, get_vacancies_data, create_database, save_data_to_database_emp, \
@@ -20,5 +22,14 @@ def main():
           f"4 - Список всех вакансий, у которых зарплата выше средней по всем вакансиям\n"
           f"5 - Список всех вакансий, в названии которых содержатся запрашиваемое слово\n"
           f"0 - Выход из программы")
+
+    while True:
+        user_input = input('Введите номер запроса\n')
+        if user_input == "1":
+            companies_and_vacancies_count = db_manager.get_companies_and_vacancies_count()
+            info_in_table = PrettyTable(['Название компании', 'Количество вакансий'])
+            for i in companies_and_vacancies_count:
+                info_in_table.add_row([i[0], i[1]])
+            print(info_in_table)
 
 
