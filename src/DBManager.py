@@ -32,3 +32,11 @@ class DBManager:
         JOIN employers USING (employer_id)
         ORDER BY salary desc""")
         return self.cur.fetchall()
+
+    def get_avg_salary(self):
+        """
+        получает среднюю зарплату по вакансиям
+        """
+        self.cur.execute("""
+        SELECT avg(salary) from vacancy""")
+        return self.cur.fetchall()
