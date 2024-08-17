@@ -1,4 +1,4 @@
-import PrettyTable
+from prettytable import PrettyTable
 
 from config import config
 from src.DBManager import DBManager
