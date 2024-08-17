@@ -73,7 +73,7 @@ def create_database(database_name: str, params: dict) -> None:
     conn.close()
 
 
-def save_data_to_database_emp(data_emp: list[dict[str, Any]], database_name: str, params: dict) -> None:
+def save_data_to_database_emp(data_emp: list[dict[str, any]], database_name: str, params: dict) -> None:
     """
     Функция для заполнения таблицы компаний в БД
     """
@@ -91,7 +91,7 @@ def save_data_to_database_emp(data_emp: list[dict[str, Any]], database_name: str
     conn.close()
 
 
-def save_data_to_database_vac(data_vac: list[dict[str, Any]], database_name: str, params: dict) -> None:
+def save_data_to_database_vac(data_vac: list[dict[str, any]], database_name: str, params: dict) -> None:
     """
     Функция для заполнения таблицы вакансий в БД
     """
