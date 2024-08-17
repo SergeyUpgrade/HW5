@@ -39,4 +39,12 @@ def main():
                 info_in_table.add_row([i[0], i[1], i[2], i[3]])
             print(info_in_table)
 
+        elif user_input == '3':
+            avg_salary = db_manager.get_avg_salary()
+            info_in_table = PrettyTable(['Средняя зарплата по вакансиям'])
+            for i in avg_salary:
+                info_in_table.add_row([i[0]])
+            print(info_in_table)
+
+
 
