@@ -40,3 +40,16 @@ class DBManager:
         self.cur.execute("""
         SELECT avg(salary) from vacancy""")
         return self.cur.fetchall()
+
+    def get_vacancies_with_higher_salary(self):
+        """
+        получает список всех вакансий, у которых зарплата выше средней по всем вакансиям
+        """
+        self.cur.execute("""
+        SELECT vacancy_name, salary
+        FROM vacancy
+        GROUP BY vacancy_name, salary
+        having salary > (SELECT AVG(salary) FROM vacancy)
+        ORDER BY salary DESC
+        """)
+        return self.cur.fetchall()
