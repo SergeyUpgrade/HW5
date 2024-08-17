@@ -21,3 +21,14 @@ class DBManager:
         """)
 
         return self.cur.fetchall()
+
+    def get_all_vacancies(self):
+        """
+        получает список всех вакансий с указанием названия компании, названия вакансии и зарплаты и ссылки на вакансию
+        """
+        self.cur.execute("""
+        SELECT employers.employer_name, vacancy_name, salary, vacancy_url
+        FROM vacancy
+        JOIN employers USING (employer_id)
+        ORDER BY salary desc""")
+        return self.cur.fetchall()
