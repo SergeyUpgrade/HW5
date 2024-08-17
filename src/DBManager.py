@@ -53,3 +53,14 @@ class DBManager:
         ORDER BY salary DESC
         """)
         return self.cur.fetchall()
+
+    def get_vacancies_with_keyword(self, keyword):
+        """
+        получает список всех вакансий, в названии которых содержатся переданные в метод слова
+        """
+        request_sql = """
+        SELECT * FROM vacancy
+        WHERE LOWER (vacancy_name) LIKE %s
+        """
+        self.cur.execute(request_sql, ('%' + keyword.lower() + '%',))
+        return self.cur.fetchall()
