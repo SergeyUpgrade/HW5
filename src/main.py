@@ -53,5 +53,17 @@ def main():
                 info_in_table.add_row([i[0]])
             print(info_in_table)
 
+        elif user_input == "5":
+            user_input = input('Введите ключевое слово ')
+            vacancies_with_keyword = db_manager.get_vacancies_with_keyword(user_input)
+            info_in_table = PrettyTable(['id вакансии', 'Название вакансии', 'Город', 'Зарплата', 'id работника ', 'URL адресс вакансии'])
+            for i in vacancies_with_keyword:
+                info_in_table.add_row([i[0], i[1], i[2], i[3], i[4], i[5]])
+            print(info_in_table)
 
+        elif user_input == '0':
+            break
+
+if __name__ == '__main__':
+    main()
 
