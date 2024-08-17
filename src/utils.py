@@ -89,3 +89,31 @@ def save_data_to_database_emp(data_emp: list[dict[str, Any]], database_name: str
 
     conn.commit()
     conn.close()
+
+
+def save_data_to_database_vac(data_vac: list[dict[str, Any]], database_name: str, params: dict) -> None:
+    """
+    Функция для заполнения таблицы вакансий в БД
+    """
+
+    conn = psycopg2.connect(dbname=database_name, **params)
+
+    with conn.cursor() as cur:
+        for vac in data_vac:
+            if vac['salary'] is None or vac['salary']['from'] is None:
+                cur.execute("""
+                   INSERT INTO vacancy (vacancy_id, vacancy_name, vacancy_area, salary, employer_id, vacancy_url)
+                   VALUES (%s, %s, %s, %s, %s, %s)
+                   """,
+                            (vac.get('id'), vac['name'], vac['area']['name'], 0, vac['employer']['id'],
+                             vac['alternate_url']))
+            else:
+                cur.execute("""
+                    INSERT INTO vacancy (vacancy_id, vacancy_name, vacancy_area, salary, employer_id, vacancy_url)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                    """,
+                            (vac.get('id'), vac['name'], vac['area']['name'], vac['salary']['from'],
+                             vac['employer']['id'], vac['alternate_url']))
+
+    conn.commit()
+    conn.close()
